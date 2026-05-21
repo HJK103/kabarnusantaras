@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kabar Nusantara ID</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="kn-nav">
+  <div class="ntop">
+    <div class="nlogo" onclick="go('home')">
+      <img src="https://files.catbox.moe/wo1fb6.png" alt="KN" onerror="this.style.display='none'">
+      <span>KABAR NUSANTARA</span>
+    </div>
+    <div class="nlinks">
+      <button class="nbtn" id="nb-berita" onclick="go('berita')">Berita</button>
+      <button class="nbtn" id="nb-detail" onclick="go('detail')">Detail</button>
+      <button class="nbtn" id="nb-search" onclick="go('search')">Cari</button>
+      <button class="nbtn" id="nb-settings" onclick="go('settings')">Pengaturan</button>
+      <button class="nbtn adm" id="nb-admin" style="display:none" onclick="go('admin')">Admin Panel</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="pg-home" class="pg show">
+  <div class="hero">
+    <img src="https://files.catbox.moe/wo1fb6.png" class="hero-logo" alt="KN" onerror="this.style.display='none'">
+    <h1>KABAR NUSANTARA ID</h1>
+    <p>Membawakan berita nasional &amp; internasional dengan informasi cepat, akurat, dan relevan.</p>
+  </div>
+  <div id="nb-sec" class="nearby" style="display:none">
+    <div class="nbtit"><span class="nbdot"></span>Berita Dekatmu &mdash; <span id="nb-city"></span></div>
+    <div class="nblist" id="nb-list"></div>
+  </div>
+  <div class="tabs">
+    <button class="tbtn on" id="tt-terbaru" onclick="setTab('terbaru')">Terbaru</button>
+    <button class="tbtn" id="tt-trending" onclick="setTab('trending')">Trending</button>
+    <button class="tbtn" id="tt-populer" onclick="setTab('populer')">Populer</button>
+  </div>
+  <div class="cats" id="hcats"></div>
+  <div id="hl-sec" class="hl-sec">
+    <div class="hllbl">Sorotan Utama</div>
+    <div class="hlgrid" id="hl-grid"></div>
+  </div>
+  <div class="grid" id="hgrid"></div>
+  <div class="absnip">
+    <h2>Tentang Kami</h2>
+    <p>Kabar Nusantara ID adalah platform media digital yang menghadirkan informasi dari berbagai penjuru dunia secara ringkas, mendalam, dan mudah diakses.</p>
+    <div class="hlrow">
+      <span class="hlitem"><span class="hlchk">&#10003;</span>Update cepat</span>
+      <span class="hlitem"><span class="hlchk">&#10003;</span>Sumber terpercaya</span>
+      <span class="hlitem"><span class="hlchk">&#10003;</span>Sumber Resmi</span>
+      <span class="hlitem"><span class="hlchk">&#10003;</span>Tanpa Iklan</span>
+      <span class="hlitem"><span class="hlchk">&#10003;</span>Akses mudah</span>
+    </div>
+  </div>
+</div>
+
+<!-- BERITA -->
+<div id="pg-berita" class="pg">
+  <div class="page-hdr">
+    <div class="page-hdr-title">Semua Berita</div>
+    <div class="cats" id="bcats" style="padding:0 0 1.2rem;border-bottom:none"></div>
+  </div>
+  <div class="grid" id="bgrid"></div>
+</div>
+
+<!-- ARTICLE -->
+<div id="pg-article" class="pg">
+  <div class="awrap" id="art-content"></div>
+</div>
+
+<!-- SEARCH -->
+<div id="pg-search" class="pg">
+  <div class="swrap">
+    <div class="page-title">Cari Berita</div>
+    <input class="sinput" id="s-input" placeholder="Cari judul, kategori, negara..." oninput="doSearch()">
+    <div class="cats" id="scats" style="padding:1rem 0 0;border-bottom:none"></div>
+    <div id="s-count" class="s-count"></div>
+    <div class="grid" id="sgrid" style="padding:1.2rem 0"></div>
+  </div>
+</div>
+
+<!-- DETAIL -->
+<div id="pg-detail" class="pg">
+  <div class="dwrap">
+    <button class="backbtn" onclick="go('home')">&#8592; Beranda</button>
+    <img src="https://files.catbox.moe/wo1fb6.png" class="detail-logo" alt="KN" onerror="this.style.display='none'">
+    <h1 class="detail-h1">Kabar Nusantara</h1>
+    <p class="detail-p">Halo, kami dari <strong>Kabar Nusantara</strong>. Platform media digital yang berkomitmen menyajikan informasi akurat, terpercaya, dan relevan bagi seluruh pembaca.</p>
+    <p class="detail-p">Kami percaya bahwa berita adalah jembatan yang menghubungkan masyarakat dengan peristiwa, fakta, dan perkembangan dunia.</p>
+    <hr class="dvd">
+    <div class="detail-sub">Apa yang kami hadirkan?</div>
+    <ul class="cklist">
+      <li><span class="ckico">&#10003;</span>Berita nasional &amp; internasional</li>
+      <li><span class="ckico">&#10003;</span>Informasi teknologi &amp; ekonomi</li>
+      <li><span class="ckico">&#10003;</span>Hiburan, olahraga &amp; lifestyle</li>
+      <li><span class="ckico">&#10003;</span>Fakta menarik dari seluruh dunia</li>
+    </ul>
+    <hr class="dvd">
+    <div class="detail-sub">Catatan dari tim.</div>
+    <p class="detail-p">Kabar Nusantara dikelola secara mandiri oleh satu orang. Kami memohon pengertian jika update berita tidak selalu secepat media besar.</p>
+    <hr class="dvd">
+    <div class="policy-lbl">KEBIJAKAN KABAR NUSANTARA</div>
+    <div class="policy-date">Berlaku sejak: 16 Mei 2026</div>
+    <div class="pblk"><h3 class="ph3">1. Akurasi Informasi</h3><p class="pp">Kami melakukan riset dan verifikasi sebelum publikasi. Tim berhak melakukan koreksi tanpa pemberitahuan.</p><hr class="dvd" style="margin:.9rem 0"></div>
+    <div class="pblk"><h3 class="ph3">2. Anti Hoax</h3><p class="pp">Kami menolak informasi palsu, manipulasi data, clickbait menyesatkan, dan konten yang dipelintir.</p><hr class="dvd" style="margin:.9rem 0"></div>
+    <div class="pblk"><h3 class="ph3">3. Netralitas &amp; Independensi</h3><p class="pp">Tidak ada intervensi editorial. Seluruh konten berdasarkan fakta dan data.</p><hr class="dvd" style="margin:.9rem 0"></div>
+    <div class="pblk"><h3 class="ph3">4. Hak Cipta</h3><p class="pp">Seluruh konten dilindungi hak cipta. Dilarang menyalin tanpa izin.</p><hr class="dvd" style="margin:.9rem 0"></div>
+    <div class="pblk"><h3 class="ph3">5. Privasi Pengguna</h3><p class="pp">Data teknis hanya untuk optimasi platform. Kami tidak menjual data kepada pihak ketiga.</p></div>
+    <div class="detail-sign">Terima kasih telah mempercayai Kabar Nusantara.<br>&mdash; BY KABAR NUSANTARA</div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="pg-settings" class="pg">
+  <div class="setwrap">
+    <div class="page-title">Pengaturan</div>
+    <div class="setsec">
+      <div class="seclbl">Tampilan</div>
+      <div class="setrow"><span class="setlbl">Tema</span>
+        <div class="tgg"><button class="tg on" id="t-light" onclick="setTheme(false)">&#9728; Light</button><button class="tg" id="t-dark" onclick="setTheme(true)">&#9790; Dark</button></div>
+      </div>
+      <div class="setrow"><span class="setlbl">Ukuran Font</span>
+        <div class="tgg"><button class="tg" id="fs-small" onclick="setFs('small')">Small</button><button class="tg on" id="fs-medium" onclick="setFs('medium')">Medium</button><button class="tg" id="fs-large" onclick="setFs('large')">Large</button></div>
+      </div>
+      <div class="setrow"><span class="setlbl">Layout Ringkas</span>
+        <div class="tgg"><button class="tg" id="cp-on" onclick="setCp(true)">ON</button><button class="tg on" id="cp-off" onclick="setCp(false)">OFF</button></div>
+      </div>
+    </div>
+    <div class="setsec">
+      <div class="seclbl">Default Artikel</div>
+      <div class="setrow"><span class="setlbl">Penulis Default</span><input class="kinput" id="def-author" value="Kabar Nusantara" style="width:180px"></div>
+      <div class="setrow"><span class="setlbl">Status Default</span><select class="ksel" id="def-status"><option>Draft</option><option>Published</option></select></div>
+      <div class="setrow"><span class="setlbl">Kategori Default</span><select class="ksel" id="def-cat"><option>Nasional</option><option>Internasional</option><option>Teknologi</option><option>Ekonomi</option><option>Hiburan</option><option>Olahraga</option><option>Lifestyle</option></select></div>
+    </div>
+    <div class="setsec">
+      <div class="seclbl">Masukkan untuk Kabar Nusantara</div>
+      <p class="set-hint">Tulis masukkan Anda Untuk Kami.</p>
+      <textarea class="ktarea" id="fb-input" placeholder="Tulis masukkan Anda di sini..." rows="4"></textarea>
+    </div>
+    <div class="set-btns">
+      <button class="btnp" onclick="saveSet()">Simpan Perubahan</button>
+      <button class="btns" id="logout-adm" style="display:none" onclick="logoutAdm()">Keluar Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="pg-admin" class="pg">
+  <div class="awrap2">
+    <div class="adhdr"><span>KN Studio</span><button class="close-btn" onclick="go('home')">&#10005; Tutup</button></div>
+    <div class="tabs" style="padding:0;margin-bottom:1.75rem">
+      <button class="tbtn on" id="at-create" onclick="setAt('create')">Buat</button>
+      <button class="tbtn" id="at-manage" onclick="setAt('manage')">Kelola</button>
+      <button class="tbtn" id="at-timeline" onclick="setAt('timeline')">Timeline</button>
+      <button class="tbtn" id="at-hoax" onclick="setAt('hoax')">Cek Fakta</button>
+      <button class="tbtn" id="at-inbox" onclick="setAt('inbox')">Kotak Masuk</button>
+    </div>
+    <div id="ad-create">
+      <div class="form-badge" id="form-mode-lbl">Buat Artikel Baru</div>
+      <div class="fg"><label class="flbl">Foto Sampul</label>
+        <div class="upzone" onclick="document.getElementById('img-file').click()">
+          <img id="img-prev" class="upprev" alt="">
+          <span id="up-hint">Klik untuk upload foto dari galeri</span>
+        </div>
+        <input type="file" id="img-file" accept="image/*" style="display:none" onchange="handleImg(event)">
+        <input class="kinput" id="img-url" placeholder="atau masukkan URL gambar..." style="margin-top:.45rem" oninput="prevUrl()">
+      </div>
+      <div class="fg"><label class="flbl">Judul Artikel</label><input class="kinput" id="f-title" placeholder="Masukkan judul artikel..."></div>
+      <div class="tcol2">
+        <div class="fg"><label class="flbl">Kategori</label><select class="ksel" id="f-cat" style="width:100%"><option>Nasional</option><option>Internasional</option><option>Teknologi</option><option>Ekonomi</option><option>Hiburan</option><option>Olahraga</option><option>Lifestyle</option></select></div>
+        <div class="fg"><label class="flbl">Sub-Kategori</label><input class="kinput" id="f-subcat" placeholder="cth: Politik, Hukum..."></div>
+      </div>
+      <div class="fg"><label class="flbl">Tag Headline</label>
+        <div id="ht-btns" class="ht-row"></div>
+        <div class="row-gap"><input class="kinput" id="ht-custom" placeholder="Tag kustom (Enter)..." onkeydown="addHT(event)" style="flex:1"><button class="btns" style="padding:.55rem .9rem" onclick="addHTclick()">+</button></div>
+      </div>
+      <div class="tcol3">
+        <div class="fg"><label class="flbl">Waktu Baca (mnt)</label><input class="kinput" id="f-rt" type="number" min="1" value="5"></div>
+        <div class="fg"><label class="flbl">Penulis</label><input class="kinput" id="f-author" value="Kabar Nusantara"></div>
+        <div class="fg"><label class="flbl">Penerjemah</label><input class="kinput" id="f-trans" placeholder="-"></div>
+      </div>
+      <div class="fg"><label class="flbl">Deskripsi Singkat</label><textarea class="ktarea" id="f-sdesc" rows="3" placeholder="Ringkasan singkat artikel..."></textarea></div>
+      <div class="fg"><label class="flbl">Isi Artikel</label><textarea class="ktarea" id="f-body" rows="12" placeholder="Tulis isi artikel di sini..."></textarea></div>
+      <div class="fg"><label class="flbl">Tags</label>
+        <div id="tag-pills" class="ht-row"></div>
+        <div class="row-gap"><input class="kinput" id="tag-custom" placeholder="Tambah tag (Enter)..." onkeydown="addTag(event)" style="flex:1"><button class="btns" style="padding:.55rem .9rem" onclick="addTagC()">+</button></div>
+      </div>
+      <div class="fg"><label class="flbl">Sumber / Referensi</label><input class="kinput" id="f-src" placeholder="https://..."></div>
+      <div class="tcol2">
+        <div class="fg"><label class="flbl">SEO Title</label><input class="kinput" id="f-seot"></div>
+        <div class="fg"><label class="flbl">SEO Description</label><input class="kinput" id="f-seod"></div>
+      </div>
+      <div class="aacts">
+        <button class="btns" onclick="saveArt('Draft')">Simpan Draft</button>
+        <button class="btns" onclick="prevArt()">Preview</button>
+        <button class="btnp" id="pub-btn" onclick="saveArt('Published')">Publikasikan</button>
+        <button class="btns cancel-btn" id="cancel-edit-btn" style="display:none" onclick="resetForm()">&#10005; Batal Edit</button>
+      </div>
+    </div>
+    <div id="ad-manage" style="display:none"><div id="mg-count" class="mglbl"></div><div id="mg-list"></div></div>
+    <div id="ad-timeline" style="display:none"><div class="sec-title">Timeline Perkembangan Berita</div><div class="tl" id="tl-list"></div></div>
+    <div id="ad-hoax" style="display:none">
+      <div class="sec-title">Cek Fakta vs Hoax</div>
+      <p class="set-hint">Verifikasi klaim menggunakan AI.</p>
+      <textarea class="ktarea" id="hoax-in" rows="4" placeholder="Masukkan klaim yang ingin dicek..."></textarea>
+      <button class="btnp" style="margin-top:.7rem" onclick="chkHoax()" id="hoax-btn">Cek Sekarang</button>
+      <div id="hoax-res" class="hres"></div>
+    </div>
+    <div id="ad-inbox" style="display:none">
+      <div class="sec-title">Kotak Masuk</div>
+      <p class="set-hint" style="margin-bottom:1.2rem">Masukkan dari pengguna via halaman Pengaturan.</p>
+      <div id="inbox-list"></div>
+    </div>
+  </div>
+</div>
+
+<footer id="kn-footer">
+  <div class="flinks">
+    <button class="flnk" onclick="go('home')">Newsroom</button>
+    <button class="flnk" onclick="go('detail')">Kontak</button>
+    <button class="flnk" onclick="go('detail')">Kebijakan</button>
+    <button class="flnk" onclick="go('detail')">Detail</button>
+  </div>
+  <div class="fcopy">&copy; 2026 Kabar Nusantara ID. All rights reserved.</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="firebase-init.js" type="module"></script>
+<script src="app.js"></script>
+</body>
+</html>
